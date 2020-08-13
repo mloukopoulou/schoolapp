@@ -86,9 +86,9 @@ export default function Students(props) {
     };
 
     return (
-        <div style={{maxWidth: '90%'}}>
+        <div style={{maxWidth: '100%'}}>
             <MaterialTable
-                title="Λίστα Μαθητών"
+                title="Διαχείριση Μαθητών"
                 icons={tableIcons}
                 onRowClick={(event, rowData) => handleRowClick(event, rowData)}
                 localization={{
@@ -99,7 +99,7 @@ export default function Students(props) {
                         nRowsSelected: '{0} επιλεγμένη(ες) εγγραφή(ες)'
                     },
                     header: {
-                        actions: 'Διαγραφή'
+                        actions: ''
                     },
                     body: {
                         emptyDataSourceMessage: 'Δεν βρέθηκαν εγγραφές',
@@ -109,14 +109,25 @@ export default function Students(props) {
                     }
                 }}
                 columns={[
-                    {title: 'id', field: 'id', hidden: true},
-                    {title: 'Όνομα', field: 'first_name'},
-                    {title: 'Επώνυμο', field: 'last_name'}
+                    {title: 'id', field: 'id', hidden: true,},
+                    {
+                        title: 'Όνομα', field: 'first_name',
+                        headerStyle: {
+                            backgroundColor: '#EFEFEF',
+                        }
+                    },
+                    {
+                        title: 'Επώνυμο', field: 'last_name',
+                        headerStyle: {
+                            backgroundColor: '#EFEFEF',
+                        }
+                    },
+
                 ]}
                 data={students}
                 actions={[
                     {
-                        icon: () => <DeleteOutline />,
+                        icon: () => <DeleteOutline/>,
                         tooltip: 'Διαγραφή Μαθητή',
                         onClick: async (event, rowData) => {
                             await deleteStudent(rowData);
