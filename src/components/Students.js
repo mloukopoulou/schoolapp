@@ -85,6 +85,7 @@ export default function Students(props) {
         setStudents(students.filter(student => student.id !== rowData.id))
     };
 
+
     return (
         <div style={{maxWidth: '100%'}}>
             <MaterialTable
