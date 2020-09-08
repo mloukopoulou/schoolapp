@@ -24,11 +24,11 @@ export default function AddStudent(props) {
     const [student, setStudent] = useState({});
 
     const handleInputChange = event => {
-        const { name, value } = event.target
+        const { name, value } = event.target;
         event.persist();
 
         setStudent({ ...student, [name]: value })
-    }
+    };
 
     const saveStudent = async (rowData) => {
         const result = await axios.put(process.env.REACT_APP_API_URL + '/students', rowData);
@@ -38,7 +38,16 @@ export default function AddStudent(props) {
         }
 
         history.push("/");
-    }
+    };
+
+    const handleOnSubmit = (event) => {
+        event.preventDefault();
+        if (!student.first_name || !student.last_name) {
+            alert('Πρέπει να συμπληρώσετε όλα τα πεδία της φόρμας');
+            return;
+        }
+        saveStudent(student);
+    };
 
     return (
         <>
@@ -48,15 +57,7 @@ export default function AddStudent(props) {
             </Typography>
             <br></br>
             <form className={classes.root} noValidate autoComplete="off"
-                onSubmit={event => {
-                    event.preventDefault();
-                    if (!student.first_name || !student.last_name) {
-                        alert('Πρέπει να συμπληρώσετε όλα τα πεδία της φόρμας');
-                        return;
-                    }
-                    saveStudent(student);
-
-                }}>
+                onSubmit={handleOnSubmit}>
                 <div>
                     <label>Όνομα</label>
                     <TextField id="first_name" name="first_name" variant="outlined" onChange={handleInputChange}/>
